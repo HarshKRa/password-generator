@@ -1,0 +1,71 @@
+.appContainer {
+  display: flex;
+  height: 100vh;
+  width: 100vw;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  font-family: sans-serif;
+  font-size: 1.3rem;
+}
+
+.mainContainer {
+  background-color: #24232a;
+  display: flex;
+  gap: 30px;
+  flex-direction: column;
+  justify-content: space-between;
+  /* height: 80vh; */
+  width: 50vw;
+  border: 2px solid black;
+  padding: 30px 40px;
+  border-radius: 20px;
+}
+
+.passwordContainer {
+  display: flex;
+  justify-content: space-between;
+}
+
+.btn {
+  color: white;
+  background-color: #2d8a8d;
+  padding: 8px 20px;
+  font-size: 1.2rem;
+  font-weight: 400;
+  border-radius: 10px;
+  border: none;
+}
+
+.charlength {
+  display: flex;
+  flex-direction: column;
+  color: white;
+  font-size: 20px;
+  font-weight: 700;
+  padding-bottom: 24px;
+}
+
+.charlength span {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  padding-bottom: 24px;
+}
+
+.checkboxes {
+  display: grid;
+  grid-template-columns: auto auto;
+  font-size: 16px;
+  font-weight: 700;
+  color: white;
+}
+
+.checkboxes div {
+  display: flex;
+  /* gap: 5px; */
+  padding-bottom: 25px;
+}
+
+.generateButton {
+}
