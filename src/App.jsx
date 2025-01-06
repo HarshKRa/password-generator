@@ -3,6 +3,8 @@ import reactLogo from "./assets/react.svg";
 import viteLogo from "/vite.svg";
 import "./App.css";
 import CheckBox from "./components/CheckBox";
+import usePasswordGenerator from "./hooks/UsePasswordGenerator";
+import PasswordStrengthIndicator from "./components/StrengthChecker";
 
 function App() {
   const [passwordLength, setPasswordLength] = useState(4);
@@ -13,6 +15,8 @@ function App() {
     { title: "Include Symbols", state: false },
   ]);
 
+  const [copied, setCopied] = useState(false);
+
   console.log(checkboxData);
 
   const handleCheckboxData = (index) => {
@@ -20,13 +24,31 @@ function App() {
     copyData[index].state = !copyData[index].state;
     setCheckboxData(copyData);
   };
+
+  const { password, errorMessage, generatePassword } = usePasswordGenerator();
+
+  const handleCopy = () => {
+    navigator.clipboard.writeText(password);
+    setCopied(true);
+
+    let setInterval = setTimeout(() => {
+      setCopied(false);
+    }, 1000);
+
+    return () => clearTimeout(setInterval);
+  };
+
   return (
     <div className="appContainer">
       <div className="mainContainer">
-        <div className="passwordContainer">
-          <span>#!Ggw%6</span>
-          <button className="btn">Copy</button>
-        </div>
+        {password && (
+          <div className="passwordContainer">
+            <span>{password}</span>
+            <button onClick={handleCopy} className="btn">
+              {copied ? "copied" : "copy"}
+            </button>
+          </div>
+        )}
         <div className="charlength">
           <span>
             <label>Character Length</label>
@@ -52,7 +74,14 @@ function App() {
             );
           })}
         </div>
-        <button className="btn">GENERATE PASSWORD</button>
+        {password && <PasswordStrengthIndicator password={password} />}
+        {errorMessage && <div className="errorMessage">{errorMessage}</div>}
+        <button
+          className="btn"
+          onClick={() => generatePassword(checkboxData, passwordLength)}
+        >
+          GENERATE PASSWORD
+        </button>
       </div>
     </div>
   );
